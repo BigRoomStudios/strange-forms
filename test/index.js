@@ -644,6 +644,73 @@ describe('strange-forms', () => {
 
             done();
         });
+
+        it('caches function when not using getFormValue argument.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({
+                        get: null,
+                        act: () => false,
+                        getFormValue: () => false,
+                        fields: ['name', 'age']
+                    });
+                }
+            };
+
+            const component = new Component(props);
+
+            const proposeOne = component.proposeNew('name');
+            const proposeTwo = component.proposeNew('name');
+
+            expect(proposeOne).to.be.a.function();
+            expect(proposeTwo).to.be.a.function();
+            expect(proposeOne).to.shallow.equal(proposeTwo);
+
+            done();
+        });
+
+        it('does not cache function when using getFormValue argument.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({
+                        get: null,
+                        act: () => false,
+                        getFormValue: () => false,
+                        fields: ['name', 'age']
+                    });
+                }
+            };
+
+            const component = new Component(props);
+
+            const getFormValue = () => false;
+            const proposeOne = component.proposeNew('name', getFormValue);
+            const proposeTwo = component.proposeNew('name', getFormValue);
+
+            expect(proposeOne).to.be.a.function();
+            expect(proposeTwo).to.be.a.function();
+            expect(proposeOne).to.not.shallow.equal(proposeTwo);
+
+            done();
+        });
     });
 
     describe('fieldError()', () => {

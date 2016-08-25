@@ -24,6 +24,9 @@ module.exports = (superclass) => class extends superclass {
         // Uniquified
         this._sfOpts.fields = Object.keys(this._sfOpts.fieldsMap);
 
+        // Cached proposers
+        this._sfProposers = {};
+
         this.state = this.state || {};
 
         if (typeof this.props === 'undefined') {
@@ -118,6 +121,16 @@ module.exports = (superclass) => class extends superclass {
 
         this._sfAssertField(field);
 
+        // Can we use a cached value?  Only when we use the default getFormValue.
+
+        const cacheable = (typeof getValue === 'undefined');
+
+        if (cacheable && this._sfProposers[field]) {
+            return this._sfProposers[field];
+        }
+
+        // Okay, we couldn't provide a cached function, carry on...
+
         getValue = getValue || this._sfOpts.getFormValue;
 
         // Per-field getFormValue
@@ -126,7 +139,7 @@ module.exports = (superclass) => class extends superclass {
             getValue = getValue[field] || getValue['*'];
         }
 
-        return (...args) => {
+        const resultFn = (...args) => {
 
             const value = getValue(...args);
 
@@ -136,6 +149,13 @@ module.exports = (superclass) => class extends superclass {
 
             this._sfAct(field, value, ...args);
         };
+
+        // Cache result if this is cacheable
+        if (cacheable) {
+            this._sfProposers[field] = resultFn;
+        }
+
+        return resultFn;
     }
 
     fieldValue(field) {
