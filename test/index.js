@@ -319,6 +319,29 @@ describe('strange-forms', () => {
 
             done();
         });
+
+        it('throws when specifying a non-existent field.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({ get: null, fields: ['name', 'age'] });
+                }
+            };
+
+            const component = new Component(props);
+
+            expect(() => component.fieldValue('badField')).to.throw('Field "badField" does not exist in this form.');
+
+            done();
+        });
     });
 
     describe('proposeNew()', () => {
@@ -370,6 +393,38 @@ describe('strange-forms', () => {
                 event,
                 'extras'
             ]);
+
+            done();
+        });
+
+        it('throws when specifying a non-existent field.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({
+                        get: null,
+                        act: this.act.bind(this),
+                        fields: ['name', 'age']
+                    });
+                }
+
+                act(...args) {
+
+                    this.actedWith = args;
+                }
+            };
+
+            const component = new Component(props);
+
+            expect(() => component.proposeNew('badField')).to.throw('Field "badField" does not exist in this form.');
 
             done();
         });
@@ -619,6 +674,33 @@ describe('strange-forms', () => {
 
             expect(component.fieldError('name')).to.equal(true); // Default
             expect(component.fieldError('name', 'error!')).to.equal('error!');
+
+            done();
+        });
+
+        it('throws when specifying a non-existent field.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({
+                        get: null,
+                        act: () => false, // No-op
+                        fields: ['name', 'age']
+                    });
+                }
+            };
+
+            const component = new Component(props);
+
+            expect(() => component.fieldError('badField')).to.throw('Field "badField" does not exist in this form.');
 
             done();
         });

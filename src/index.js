@@ -11,7 +11,19 @@ module.exports = (superclass) => class extends superclass {
         fields = fields || [];
         getFormValue = getFormValue || internals.defaultGetFormValue;
 
-        this._sfOpts = { act, get, fields, getFormValue };
+        this._sfOpts = { act, get, getFormValue };
+
+        // For quick field-exists lookups
+
+        this._sfOpts.fieldsMap = fields.reduce((collect, field) => {
+
+            collect[field] = true;
+            return collect;
+        }, {});
+
+        // Uniquified
+        this._sfOpts.fields = Object.keys(this._sfOpts.fieldsMap);
+
         this.state = this.state || {};
 
         if (typeof this.props === 'undefined') {
@@ -95,7 +107,16 @@ module.exports = (superclass) => class extends superclass {
         this._sfUpdateState(nextProps);
     }
 
+    _sfAssertField(field) {
+
+        if (!this._sfOpts.fieldsMap[field]) {
+            throw new Error(`Field "${field}" does not exist in this form.`);
+        }
+    }
+
     proposeNew(field, getValue) {
+
+        this._sfAssertField(field);
 
         getValue = getValue || this._sfOpts.getFormValue;
 
@@ -119,10 +140,14 @@ module.exports = (superclass) => class extends superclass {
 
     fieldValue(field) {
 
+        this._sfAssertField(field);
+
         return this.state[internals.prefixed(field)];
     }
 
     fieldError(field, error) {
+
+        this._sfAssertField(field);
 
         if (typeof error === 'undefined') {
             error = true; // Default true
@@ -147,6 +172,7 @@ internals.prefixed = (field) => `_sf_${field}`;
 // Ex.
 // getDeep({ a: { b: null } }, 'a.b') === null
 // getDeep({ a: { b: 'c' } }, 'a.b') === 'c'
+// getDeep({ a: { b: 'c' } }, 'a.b.c') === undefined
 internals.getDeep = (obj, deepProp) => {
 
     return deepProp.split('.').reduce((lastObj, prop) => {
