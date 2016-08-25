@@ -28,14 +28,16 @@ module.exports = class extends StrangeForms(React.Component) {
             // Declare the interesting fields.
             fields: ['name', 'age', 'position', 'seasonal'],
             // Obtain a form field value from props.
-            // Can also be a single string or single function.
+            // Can also be a single string, single function, or null (see API docs).
             get: {
                 name: (someProps) => someProps.person.firstName,
                 age: 'person.age', // Stringified someProps.person.age
                 '*': (someProps, field) => someProps.occupation[field] // Catch-all for other fields
             },
-            act: this.act.bind(this), // Also takes per-field format similar to get
-            getFormValue: this.getFormValue.bind(this) // Defaults to (e) => e.target.value.  Also takes per-field format similar to get
+            // Also takes per-field format similar to get.
+            act: this.act.bind(this),
+            // Defaults to (e) => e.target.value.  Also takes per-field format similar to get.
+            getFormValue: this.getFormValue.bind(this)
         });
     }
 
@@ -58,7 +60,7 @@ module.exports = class extends StrangeForms(React.Component) {
 
         return ['name', 'age', 'position', 'seasonal'].some((field) => {
 
-            // By default returns true if the field is invalid
+            // By default returns true if the field is invalid.
             return this.fieldError(field);
         });
     }
@@ -72,9 +74,9 @@ module.exports = class extends StrangeForms(React.Component) {
             Name:
             <input
                 type="text"
-                // Reflects in local component state
+                // Reflects in local component state.
                 value={this.fieldValue('name')}
-                // Updates local component state and calls act, all using getFormValue option
+                // Updates local component state and calls act, all using getFormValue option.
                 onChange={this.proposeNew('name')}
             />
 
