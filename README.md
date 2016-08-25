@@ -6,7 +6,7 @@ Redux/React toolkit for forms
 [![Coverage Status](https://coveralls.io/repos/BigRoomStudios/strange-forms/badge.svg?branch=master&service=github)](https://coveralls.io/github/BigRoomStudios/strange-forms?branch=master)
 
 ## Usage
-This is a toolkit for using forms with React and Redux.  Specifically, this is meant to help create components containing forms that attempt update and reflect state.  The special thing about this library is that it assumes the value displayed in a form may deviate from the current value in state.  When there's a discrepancy between the value in the form and the value in state, this can be detected as being an invalid field in a form.
+This is a toolkit for using forms with React and Redux.  Specifically, this is meant to help create components containing forms that attempt to update and reflect application state.  The special thing about this library is that it assumes the value displayed in a form may deviate from the current value in state, and this library does not rely on any special coordination with actions/reducers as in [react-redux-form](https://github.com/davidkpiano/react-redux-form).  When there's a discrepancy between a value in the form and a value in state, it can be recognized an invalid field in the form– this simple fact allows validation to occur solely in the reducer if desired (where it belongs!).
 
 ### Example
 ```js
@@ -58,8 +58,8 @@ module.exports = class extends StrangeForms(React.Component) {
 
         return ['name', 'age', 'position', 'seasonal'].some((field) => {
 
-            // Will pass-through true if the field is invalid
-            return this.fieldError(field, true);
+            // By default returns true if the field is invalid
+            return this.fieldError(field);
         });
     }
 
@@ -129,5 +129,5 @@ Returns `error` if the current value displaying in the component does not match 
 #### `component.proposeNew(field, [getFormValue])`
 Returns a function `function(...anyArgs)` that uses the latest form value for `field` to update local component state and perform `act(field, value, ...anyArgs)`.  The latest form value will be determined by `getFormValue(...anyArgs)`, where `getFormValue` defaults to the function specified in `component.strangeForm(options)`.
 
-#### `form.componentWillReceiveProps(nextProps)`
+#### `component.componentWillReceiveProps(nextProps)`
 This is a lifecycle method used by React, and is not meant to be called manually.  Internally strange-forms extends the method in order to update the displayed form values (which live in local component state) when new props are incoming.
