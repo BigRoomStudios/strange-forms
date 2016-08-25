@@ -34,8 +34,8 @@ module.exports = class extends StrangeForms(React.Component) {
                 age: 'person.age', // Stringified someProps.person.age
                 '*': (someProps, field) => someProps.occupation[field] // Catch-all for other fields
             },
-            act: this.act.bind(this), // Also takes a format similar to get
-            getFormValue: this.getFormValue.bind(this) // Defaults to (e) => e.target.value
+            act: this.act.bind(this), // Also takes per-field format similar to get
+            getFormValue: this.getFormValue.bind(this) // Defaults to (e) => e.target.value.  Also takes per-field format similar to get
         });
     }
 
@@ -113,12 +113,13 @@ This must be called in the component's constructor, and that constructor must ha
  - `fields` - an array of form field names.  Defaults to an empty array.
  - `get` - defines how fields values are mapped from component properties.  Should be specified as either,
    - a function with signature `function(props, field)` that returns a form field value.
-   - a string (e.g. `'user.store'`) that defines a path into component properties where there's an object mapping field names to values.
+   - a string (e.g. `'user.store'`) that defines a path into component properties where there's an object mapping field names to values.  In this case the result will be stringified.
+   - `null`, which specifies that field values live directly on props.  In this case the result will be stringified.
    - an object whose keys are field names and whose values are field-specific functions or strings as defined above.  Note, if a string is specified it needs to provide the _complete_ path to the value within component props.  A key `'*'` may be used to define a catch-all.
  - `act` - defines how application-wide updates are made to state given a field and a new form value for that field.  Should be specified as either,
    - a function with signature `function(field, value, ...args)`, where `args` are additional arguments passed to a `component.proposeNew()`-generated handler.
    - an object whose keys are field names and whose values are field-specific functions as defined above.  A key `'*'` may be used to define a catch-all.
- - `getFormValue` - defines a default `getFormValue` function to be used by `component.proposeNew()`.  This default defaults to `(e) => e.target.value`.
+ - `getFormValue` - defines a default `getFormValue` to be used by `component.proposeNew()`.  It should be a function or object specifying functions per field, similar to `act` and `get`.  Defaults to `(e) => e.target.value`.  See `component.proposeNew()` for further description of its usage.
 
 #### `component.fieldValue(field)`
 Returns the field value that should display in the component.
@@ -127,7 +128,7 @@ Returns the field value that should display in the component.
 Returns `error` if the current value displaying in the component does not match (`===`) the value found in component props.  The `error` parameter defaults to `true`.  If `error` is specified as a function `function(propValue, displayValue)` the result of that function will be returned.
 
 #### `component.proposeNew(field, [getFormValue])`
-Returns a function `function(...anyArgs)` that uses the latest form value for `field` to update local component state and perform `act(field, value, ...anyArgs)`.  The latest form value will be determined by `getFormValue(...anyArgs)`, where `getFormValue` defaults to the function specified in `component.strangeForm(options)`.
+Returns a function `function(...anyArgs)` that uses the latest form value for `field` to update local component state and perform `act(field, value, ...anyArgs)`.  The latest form value will be determined by `getFormValue(...anyArgs)`, where `getFormValue` defaults to the value specified in `component.strangeForm(options)`.  If `getFormValue` is an object, it may specify the function to use on a per-field basis, where the key `'*'` may be used as a catch-all.
 
 #### `component.componentWillReceiveProps(nextProps)`
 This is a lifecycle method used by React, and is not meant to be called manually.  Internally strange-forms extends the method in order to update the displayed form values (which live in local component state) when new props are incoming.
