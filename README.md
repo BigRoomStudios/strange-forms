@@ -130,5 +130,7 @@ Returns `error` if the current value displaying in the component does not match 
 #### `component.proposeNew(field, [getFormValue])`
 Returns a function `function(...anyArgs)` that uses the latest form value for `field` to update local component state and perform `act(field, value, ...anyArgs)`.  The latest form value will be determined by `getFormValue(...anyArgs)`, where `getFormValue` defaults to the value specified in [`component.strangeForm(options)`](#componentstrangeformoptions).  If `getFormValue` is an object, it may specify the function to use on a per-field basis, where the key `'*'` may be used as a catch-all.
 
+When not using the `getFormValue` argument, the result of this function is cached on a per-field basis.  The reason for that is to allow usage of `proposeNew()` inside a component's `render()` (similar to the [example](#example)) without concern about creating new function references.
+
 #### `component.componentWillReceiveProps(nextProps)`
 This is a lifecycle method used by React, and is not meant to be called manually.  Internally strange-forms extends the method in order to update the displayed form values (which live in local component state) when new props are incoming.
