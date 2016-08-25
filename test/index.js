@@ -796,7 +796,7 @@ describe('strange-forms', () => {
 
             component.proposeNew('name')({ target: { value: 'JRD' } });
 
-            expect(component.fieldError('name', (...args) => args)).to.equal(['MVX', 'JRD']);
+            expect(component.fieldError('name', (...args) => args)).to.equal(['JRD', 'MVX']);
 
             done();
         });

@@ -182,7 +182,7 @@ module.exports = (superclass) => class extends superclass {
             return null;
         }
 
-        return (typeof error === 'function') ? error(propValue, stateValue) : error;
+        return (typeof error === 'function') ? error(stateValue, propValue) : error;
     }
 };
 

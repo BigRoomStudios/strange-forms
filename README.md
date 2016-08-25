@@ -125,7 +125,7 @@ This must be called in the component's constructor, and that constructor must ha
 Returns the field value that should display in the component.
 
 #### `component.fieldError(field, [error])`
-Returns `error` if the current value displaying in the component does not match (`===`) the value found in component props.  The `error` parameter defaults to `true`.  If `error` is specified as a function `function(propValue, displayValue)` the result of that function will be returned.
+Returns `error` if the current value displaying in the component does not match (`===`) the value found in component props.  The `error` parameter defaults to `true`.  If `error` is specified as a function `function(displayValue, propValue)` the result of that function will be returned.
 
 #### `component.proposeNew(field, [getFormValue])`
 Returns a function `function(...anyArgs)` that uses the latest form value for `field` to update local component state and perform `act(field, value, ...anyArgs)`.  The latest form value will be determined by `getFormValue(...anyArgs)`, where `getFormValue` defaults to the value specified in [`component.strangeForm(options)`](#componentstrangeformoptions).  If `getFormValue` is an object, it may specify the function to use on a per-field basis, where the key `'*'` may be used as a catch-all.
