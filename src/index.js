@@ -83,10 +83,12 @@ module.exports = (superclass) => class extends superclass {
 
         return this._sfOpts.fields.reduce((collector, field) => {
 
-            const value = this._sfGet(props, field);
+            const newValue = this._sfGet(props, field);
+            const oldValue = this._sfGet(this.props, field);
+            const curValue = this.fieldValue(field);
 
-            if (value !== this.fieldValue(field)) {
-                collector[internals.prefixed(field)] = value;
+            if (newValue !== oldValue || typeof curValue === 'undefined') {
+                collector[internals.prefixed(field)] = newValue;
             }
 
             return collector;
