@@ -881,6 +881,7 @@ describe('strange-forms', () => {
             ];
 
             component.componentWillReceiveProps(nextProps[0]);
+            component.props = nextProps[0];
 
             expect(component.state).to.equal({
                 _sf_name: 'MVX',
@@ -888,6 +889,7 @@ describe('strange-forms', () => {
             });
 
             component.componentWillReceiveProps(nextProps[1]);
+            component.props = nextProps[1];
 
             expect(component.state).to.equal({
                 _sf_name: 'JRD',
@@ -900,8 +902,7 @@ describe('strange-forms', () => {
                     _sf_age: '13'
                 },
                 {
-                    _sf_name: 'JRD',
-                    _sf_age: '13'
+                    _sf_name: 'JRD'
                 }
             ]);
 
