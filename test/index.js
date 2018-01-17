@@ -49,6 +49,32 @@ describe('strange-forms', () => {
             done();
         });
 
+        it('does not update a prop in state when it hasn\'t changed.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({ get: null, fields: ['name', 'age'] });
+                }
+            };
+
+            const component = new Component(props);
+
+            const statePatch = component._sfStatePatch(props);
+
+            expect(statePatch).to.equal({});
+
+            done();
+        });
+
+        // return;
         it('accepts string for field getter.', (done) => {
 
             const props = {
@@ -874,7 +900,8 @@ describe('strange-forms', () => {
                     _sf_age: '13'
                 },
                 {
-                    _sf_name: 'JRD'
+                    _sf_name: 'JRD',
+                    _sf_age: '13'
                 }
             ]);
 

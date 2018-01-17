@@ -87,7 +87,7 @@ module.exports = (superclass) => class extends superclass {
             const oldValue = this._sfGet(this.props, field);
             const curValue = this.fieldValue(field);
 
-            if (newValue !== oldValue || typeof curValue === 'undefined') {
+            if (newValue !== oldValue || (typeof curValue === 'undefined' && typeof newValue !== 'undefined')) {
                 collector[internals.prefixed(field)] = newValue;
             }
 

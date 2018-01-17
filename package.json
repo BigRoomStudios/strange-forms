@@ -1,6 +1,6 @@
 {
   "name": "strange-forms",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Redux/React toolkit for forms",
   "main": "lib/index.js",
   "scripts": {
