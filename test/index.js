@@ -49,7 +49,7 @@ describe('strange-forms', () => {
             done();
         });
 
-        it('does not update a prop in state when it hasn\'t changed.', (done) => {
+        it('does not update state from prop when prop hasn\'t changed.', (done) => {
 
             const props = {
                 name: 'MVX',
@@ -61,20 +61,45 @@ describe('strange-forms', () => {
                 constructor(initProps) {
 
                     super(initProps);
-                    this.strangeForm({ get: null, fields: ['name', 'age'] });
+                    this.strangeForm({
+                        get: null,
+                        act: () => false,
+                        fields: ['name', 'age']
+                    });
                 }
             };
 
             const component = new Component(props);
 
-            const statePatch = component._sfStatePatch(props);
+            expect(component.state).to.equal({
+                _sf_name: 'MVX',
+                _sf_age: '13'
+            });
 
-            expect(statePatch).to.equal({});
+            component.proposeNew('name')({ target: { value: 'JRD' } });
+
+            expect(component.state).to.equal({
+                _sf_name: 'JRD',
+                _sf_age: '13'
+            });
+
+            component.componentWillReceiveProps(props);
+            component.props = props;
+
+            // Local state has not been overwritten
+            expect(component.state).to.equal({
+                _sf_name: 'JRD',
+                _sf_age: '13'
+            });
+
+            expect(component.setStates).to.equal([
+                { _sf_name: 'JRD' },
+                {}
+            ]);
 
             done();
         });
 
-        // return;
         it('accepts string for field getter.', (done) => {
 
             const props = {
