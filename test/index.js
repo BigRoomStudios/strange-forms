@@ -49,6 +49,57 @@ describe('strange-forms', () => {
             done();
         });
 
+        it('does not update state from prop when prop hasn\'t changed.', (done) => {
+
+            const props = {
+                name: 'MVX',
+                age: 13
+            };
+
+            const Component = class extends StrangeSansLifecycle {
+
+                constructor(initProps) {
+
+                    super(initProps);
+                    this.strangeForm({
+                        get: null,
+                        act: () => false,
+                        fields: ['name', 'age']
+                    });
+                }
+            };
+
+            const component = new Component(props);
+
+            expect(component.state).to.equal({
+                _sf_name: 'MVX',
+                _sf_age: '13'
+            });
+
+            component.proposeNew('name')({ target: { value: 'JRD' } });
+
+            expect(component.state).to.equal({
+                _sf_name: 'JRD',
+                _sf_age: '13'
+            });
+
+            component.componentWillReceiveProps(props);
+            component.props = props;
+
+            // Local state has not been overwritten
+            expect(component.state).to.equal({
+                _sf_name: 'JRD',
+                _sf_age: '13'
+            });
+
+            expect(component.setStates).to.equal([
+                { _sf_name: 'JRD' },
+                {}
+            ]);
+
+            done();
+        });
+
         it('accepts string for field getter.', (done) => {
 
             const props = {
@@ -855,6 +906,7 @@ describe('strange-forms', () => {
             ];
 
             component.componentWillReceiveProps(nextProps[0]);
+            component.props = nextProps[0];
 
             expect(component.state).to.equal({
                 _sf_name: 'MVX',
@@ -862,6 +914,7 @@ describe('strange-forms', () => {
             });
 
             component.componentWillReceiveProps(nextProps[1]);
+            component.props = nextProps[1];
 
             expect(component.state).to.equal({
                 _sf_name: 'JRD',
