@@ -3,8 +3,8 @@ const Layout = require('../components/Layout');
 const NotFoundPage = require('../components/NotFoundPage');
 const NotFoundHelpers = require('./helpers/not-found');
 const HomePage = require('./home/components/HomePage');
-
-const CounterPage = Lazy(() => import('./counter/containers/CounterPage'));
+const UncontrolledFormPage = require('./forms/components/UncontrolledPage');
+const ControlledFormPage = require('./forms/components/ControlledPage');
 
 module.exports = [
     {
@@ -17,10 +17,15 @@ module.exports = [
                 exact: true
             },
             {
-                path: 'counter',
-                component: CounterPage,
+                path: 'uncontrolled',
+                component: UncontrolledFormPage,
                 exact: true
             },
+            // {
+            //     path: 'controlled',
+            //     component: ControlledFormPage,
+            //     exact: true
+            // },
             NotFoundHelpers.CatchAllRoute
         ]
     }
