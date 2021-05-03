@@ -1,0 +1,89 @@
+{
+  "name": "strangeluv",
+  "version": "2.0.0",
+  "main": "server/plugin.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config config/webpack.config.js",
+    "build:dev": "webpack --config config/webpack.config.js",
+    "clean": "rimraf build",
+    "lint": "eslint .",
+    "serve": "NODE_ENV=production node server",
+    "serve:dev": "node server",
+    "start": "webpack serve --hot --mode=development --config config/webpack.config.js",
+    "test": "jest --config config/jest.config.js"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigRoomStudios/strangeluv.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "4.11.x",
+    "@material-ui/styles": "4.11.x",
+    "connected-react-router": "6.x.x",
+    "history": "^4.10.1",
+    "immer": "8.x.x",
+    "normalizr": "3.x.x",
+    "prop-types": "^15.7.2",
+    "react": "17.x.x",
+    "react-dom": "^17.0.1",
+    "react-error-boundary": "3.x.x",
+    "react-hot-loader": "4.x.x",
+    "react-redux": "7.x.x",
+    "react-router-dom": "5.x.x",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "strange-forms": "^1.1.0",
+    "strange-middle-end": "0.4.x",
+    "strange-router": "2.x.x",
+    "styled-components": "5.x.x"
+  },
+  "devDependencies": {
+    "@babel/core": "7.x.x",
+    "@babel/preset-react": "^7.x.x",
+    "@hapi/eslint-config-hapi": "^13.0.2",
+    "@hapi/eslint-plugin-hapi": "4.x.x",
+    "@hapi/hapi": "20.x.x",
+    "@hapi/inert": "6.x.x",
+    "@hot-loader/react-dom": "17.x.x",
+    "@testing-library/react": "11.x.x",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "26.x.x",
+    "babel-loader": "8.x.x",
+    "babel-preset-react-app": "^10.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "error-overlay-webpack-plugin": "^0.4.1",
+    "eslint": "7.x.x",
+    "eslint-config-standard-react": "11.x.x",
+    "eslint-loader": "^4.0.0",
+    "eslint-plugin-jsx-a11y": "6.x.x",
+    "eslint-plugin-react": "7.x.x",
+    "eslint-plugin-react-hooks": "4.x.x",
+    "file-loader": "6.x.x",
+    "html-webpack-plugin": "4.x.x",
+    "jest": "26.x.x",
+    "jest-environment-jsdom-fifteen": "^1.0.2",
+    "pre-commit": "^1.2.2",
+    "process": "^0.11.10",
+    "react-dev-utils": "^11.0.4",
+    "regenerator-runtime": "0.13.x",
+    "rimraf": "3.x.x",
+    "webpack": "4.x.x",
+    "webpack-cli": "4.x.x",
+    "webpack-dev-server": "3.x.x"
+  },
+  "babel": {
+    "extends": "./config/babel.config.js"
+  },
+  "eslintConfig": {
+    "extends": "./config/eslint.config.js"
+  }
+}
