@@ -37,7 +37,8 @@ exports.useField = function useField(
 // Notice that if the external state doesn't accept the value, it will still be reflected in local form state.
 // The term "propose" is used due to this fact that it may not be accepted. This can be useful to allow the
 // user to input disallowed values temporarily, e.g. when you type an email the first character isn't going to
-// generate a valid email address.
+// generate a valid email address. The external state also may not update at all while changing field values,
+// as in any uncontrolled form!
 
 internals.defaultAct = () => null;
 
