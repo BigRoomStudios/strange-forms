@@ -9,26 +9,36 @@ exports.useField = function useField(
     {
         act = internals.defaultAct,
         getFormValue = internals.defaultGetFormValue
-    } = {},
-    deps
+    } = {}
 ) {
 
+    // Setup local form state based on some external state.
     const [fieldValue, setFieldValue] = useState(get);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => setFieldValue(get), deps || [get]);
+    // When external state changes, sync it to local form state.
+    useEffect(() => setFieldValue(get), [get]);
 
+    // When updating a field...
     const proposeNew = (event) => {
 
+        // ...map the component/DOM event to a value...
         const val = getFormValue(event);
 
+        // ...then attempt to sync that value to external state (e.g. props), and sync it to local form state.
         act(val);
         setFieldValue(val);
     };
 
+    // Return local form state, and a handler to propose a new value.
     return [fieldValue, proposeNew];
 };
 
-internals.defaultGetFormValue = (ev) => ev.target.value;
+// A note on the above 👆
+// Notice that if the external state doesn't accept the value, it will still be reflected in local form state.
+// The term "propose" is used due to this fact that it may not be accepted. This can be useful to allow the
+// user to input disallowed values temporarily, e.g. when you type an email the first character isn't going to
+// generate a valid email address.
 
 internals.defaultAct = () => null;
+
+internals.defaultGetFormValue = (ev) => ev.target.value;
