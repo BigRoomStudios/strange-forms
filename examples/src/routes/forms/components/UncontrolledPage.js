@@ -7,6 +7,8 @@ module.exports = function UncontrolledPage() {
     const [values, setValues] = useState({ ...UncontrolledForm.defaults, submitted: false });
 
     return <FormValuesLayout values={values}>
-        <UncontrolledForm onSubmit={(result) => setValues({ ...result, submitted: true })} />
+        <UncontrolledForm
+            onSubmit={(result) => setValues({ ...result, submitted: true })}
+        />
     </FormValuesLayout>;
 };

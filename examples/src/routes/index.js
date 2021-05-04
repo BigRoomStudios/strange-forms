@@ -4,6 +4,7 @@ const NotFoundHelpers = require('./helpers/not-found');
 const HomePage = require('./home/components/HomePage');
 const UncontrolledFormPage = require('./forms/components/UncontrolledPage');
 const ControlledFormPage = require('./forms/components/ControlledPage');
+const ComplexValueFormPage = require('./forms/components/ComplexValuePage');
 
 module.exports = [
     {
@@ -23,6 +24,11 @@ module.exports = [
             {
                 path: 'controlled',
                 component: ControlledFormPage,
+                exact: true
+            },
+            {
+                path: 'complex-value',
+                component: ComplexValueFormPage,
                 exact: true
             },
             NotFoundHelpers.CatchAllRoute

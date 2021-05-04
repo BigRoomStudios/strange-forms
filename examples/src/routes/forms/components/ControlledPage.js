@@ -9,6 +9,7 @@ module.exports = function UncontrolledPage() {
 
     return <FormValuesLayout values={values}>
         <ControlledForm
+            {...values}
             component="form"
             onChange={(updated) => setValues({ ...values, ...updated, submitted: false })}
             onSubmit={(ev) => {
