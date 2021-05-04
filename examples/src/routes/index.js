@@ -6,6 +6,7 @@ const UncontrolledFormPage = require('./forms/components/UncontrolledPage');
 const ControlledFormPage = require('./forms/components/ControlledPage');
 const ComplexValueFormPage = require('./forms/components/ComplexValuePage');
 const NestedFormPage = require('./forms/components/NestedPage');
+const ConstraintsFormPage = require('./forms/components/ConstraintsPage');
 
 module.exports = [
     {
@@ -35,6 +36,11 @@ module.exports = [
             {
                 path: 'nested',
                 component: NestedFormPage,
+                exact: true
+            },
+            {
+                path: 'constraints',
+                component: ConstraintsFormPage,
                 exact: true
             },
             NotFoundHelpers.CatchAllRoute
