@@ -103,13 +103,16 @@ module.exports = class ComplexValueForm extends StrangeForms(Component) {
             </Grid>
             <Grid item xs={8}>
                 <RichTextEditor
+                    placeholder="About"
                     value={this.fieldValue('about')}
                     onChange={this.proposeNew('about')}
                     toolbarConfig={internals.toolbarConfig}
                 />
             </Grid>
             <Grid item xs={4} container justify="center">
-                <Button type="button" variant="outlined" color="secondary" onClick={onClickRerender}>Re-render parent</Button>
+                <Button type="button" variant="outlined" color="secondary" onClick={onClickRerender}>
+                    Re-render parent
+                </Button>
             </Grid>
             <SubmitButtonRow />
         </Grid>;

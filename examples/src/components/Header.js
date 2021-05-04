@@ -15,7 +15,6 @@ module.exports = () => {
         <AppBar position='static'>
             <Toolbar>
                 <SiteTitle>strange-forms</SiteTitle>
-                <Link exact to='/'>Home</Link>
                 <Link to='/uncontrolled'>Uncontrolled</Link>
                 <Link to='/controlled'>Controlled</Link>
                 <Link to='/complex-value'>Complex Value</Link>
