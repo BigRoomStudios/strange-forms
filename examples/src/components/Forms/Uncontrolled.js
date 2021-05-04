@@ -23,9 +23,9 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
             get: {
                 // These returned values never change, so this
                 // simply sets a default value for each field.
-                name: () => UncontrolledForm.defaults.name,
-                email: () => UncontrolledForm.defaults.email,
-                spam: () => UncontrolledForm.defaults.spam
+                name: (props) => props.name ?? UncontrolledForm.defaults.name,
+                email: (props) => props.email ?? UncontrolledForm.defaults.email,
+                spam: (props) => props.spam ?? UncontrolledForm.defaults.spam
             },
             // This act() is a no-op because this form is uncontrolled,
             // and we don't need to sync form state anywhere (e.g. not up to props).

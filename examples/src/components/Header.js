@@ -14,13 +14,13 @@ module.exports = () => {
     return (
         <AppBar position='static'>
             <Toolbar>
-                <SiteTitle>Strangeluv</SiteTitle>
+                <SiteTitle>strange-forms</SiteTitle>
                 <Link exact to='/'>Home</Link>
                 <Link to='/uncontrolled'>Uncontrolled</Link>
                 <Link to='/controlled'>Controlled</Link>
                 <Link to='/complex-value'>Complex Value</Link>
                 <Link to='/nested'>Nested</Link>
-                <Link to='/uncontrolled-initial'>Uncontrolled Initial</Link>
+                <Link to='/constraints'>Constraints</Link>
                 <Link to='/list'>List</Link>
             </Toolbar>
         </AppBar>

@@ -5,6 +5,7 @@ const HomePage = require('./home/components/HomePage');
 const UncontrolledFormPage = require('./forms/components/UncontrolledPage');
 const ControlledFormPage = require('./forms/components/ControlledPage');
 const ComplexValueFormPage = require('./forms/components/ComplexValuePage');
+const NestedFormPage = require('./forms/components/NestedPage');
 
 module.exports = [
     {
@@ -29,6 +30,11 @@ module.exports = [
             {
                 path: 'complex-value',
                 component: ComplexValueFormPage,
+                exact: true
+            },
+            {
+                path: 'nested',
+                component: NestedFormPage,
                 exact: true
             },
             NotFoundHelpers.CatchAllRoute
