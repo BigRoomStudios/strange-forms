@@ -5,7 +5,7 @@ const { default: TextField } = require('@material-ui/core/TextField');
 const { default: FormControlLabel } = require('@material-ui/core/FormControlLabel');
 const { default: Checkbox } = require('@material-ui/core/Checkbox');
 
-module.exports = class UncontrolledForm extends StrangeForms(Component) {
+module.exports = class ControlledForm extends StrangeForms(Component) {
 
     static defaults = {
         name: '',
@@ -21,9 +21,9 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
             fields: ['name', 'email', 'spam'],
             get: {
                 // TODO sync down
-                name: (props) => (props.name ?? UncontrolledForm.defaults.name),
-                email: (props) => (props.email ?? UncontrolledForm.defaults.email),
-                spam: (props) => (props.spam ?? UncontrolledForm.defaults.spam)
+                name: (props) => (props.name ?? ControlledForm.defaults.name),
+                email: (props) => (props.email ?? ControlledForm.defaults.email),
+                spam: (props) => (props.spam ?? ControlledForm.defaults.spam)
             },
             // TODO sync up
             act: (field, value) => this.props.onChange({ [field]: value }),
