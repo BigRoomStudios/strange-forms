@@ -1,4 +1,3 @@
-const { lazy: Lazy } = require('react');
 const Layout = require('../components/Layout');
 const NotFoundPage = require('../components/NotFoundPage');
 const NotFoundHelpers = require('./helpers/not-found');
