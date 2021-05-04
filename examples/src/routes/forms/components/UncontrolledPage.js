@@ -4,9 +4,9 @@ const UncontrolledForm = require('../../../components/Forms/Uncontrolled');
 
 module.exports = function UncontrolledPage() {
 
-    const [values, setValues] = useState(null);
+    const [values, setValues] = useState({ ...UncontrolledForm.defaults, submitted: false });
 
     return <FormValuesLayout values={values}>
-        <UncontrolledForm onSubmit={setValues} />
+        <UncontrolledForm onSubmit={(result) => setValues({ ...result, submitted: true })} />
     </FormValuesLayout>;
 };

@@ -2,11 +2,17 @@ const { Component } = require('react');
 const StrangeForms = require('strange-forms');
 const { default: Grid } = require('@material-ui/core/Grid');
 const { default: TextField } = require('@material-ui/core/TextField');
-const { default: Button } = require('@material-ui/core/Button');
 const { default: FormControlLabel } = require('@material-ui/core/FormControlLabel');
 const { default: Checkbox } = require('@material-ui/core/Checkbox');
+const SubmitButtonRow = require('./SubmitButtonRow');
 
 module.exports = class UncontrolledForm extends StrangeForms(Component) {
+
+    static defaults = {
+        name: '',
+        email: '',
+        spam: true
+    }
 
     constructor(...args) {
 
@@ -17,9 +23,9 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
             get: {
                 // These returned values never change, so this
                 // simply sets a default value for each field.
-                name: () => '',
-                email: () => '',
-                spam: () => true
+                name: () => UncontrolledForm.defaults.name,
+                email: () => UncontrolledForm.defaults.email,
+                spam: () => UncontrolledForm.defaults.spam
             },
             // This act() is a no-op because this form is uncontrolled,
             // and we don't need to sync form state anywhere (e.g. not up to props).
@@ -42,12 +48,12 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
         });
     }
 
-    render(props) {
+    render() {
 
         return <Grid
             container
             spacing={3}
-            {...props}
+            {...this.props}
             component="form"
             onSubmit={this.handleSubmit}
         >
@@ -79,9 +85,7 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
                     />}
                 />
             </Grid>
-            <Grid item xs={12} container justify="center">
-                <Button type="submit" variant="outlined" color="primary">Submit</Button>
-            </Grid>
+            <SubmitButtonRow />
         </Grid>;
     }
 };

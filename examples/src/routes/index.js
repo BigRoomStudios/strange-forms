@@ -20,11 +20,11 @@ module.exports = [
                 component: UncontrolledFormPage,
                 exact: true
             },
-            // {
-            //     path: 'controlled',
-            //     component: ControlledFormPage,
-            //     exact: true
-            // },
+            {
+                path: 'controlled',
+                component: ControlledFormPage,
+                exact: true
+            },
             NotFoundHelpers.CatchAllRoute
         ]
     }

@@ -1,19 +1,24 @@
 const { useState } = require('react');
-const { default: Card } = require('@material-ui/core/Card');
+const FormValuesLayout = require('./FormValuesLayout');
 const ControlledForm = require('../../../components/Forms/Controlled');
+const SubmitButtonRow = require('../../../components/Forms/SubmitButtonRow');
 
-const internals = {};
+module.exports = function UncontrolledPage() {
 
-module.exports = function ControlledPage() {
+    const [values, setValues] = useState({ ...ControlledForm.defaults, submitted: false });
 
-    const [values, setValues] = useState(null);
+    return <FormValuesLayout values={values}>
+        <ControlledForm
+            component="form"
+            onChange={(updated) => setValues({ ...values, ...updated, submitted: false })}
+            onSubmit={(ev) => {
 
-    return (<>
-        <Card>
-            <ControlledForm onSubmit={setValues} />
-        </Card>
-        {values && <Card>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-        </Card>}
-    </>);
+                ev.preventDefault();
+
+                setValues({ ...values, submitted: true });
+            }}
+        >
+            <SubmitButtonRow />
+        </ControlledForm>
+    </FormValuesLayout>;
 };
