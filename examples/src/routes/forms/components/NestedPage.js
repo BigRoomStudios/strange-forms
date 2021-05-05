@@ -34,8 +34,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Nested"
-        formUrl="/"
-        pageUrl="/"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/Nested.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/NestedPage.js"
     >
         <Typography>
             This form utilizes the controlled form component from the <Link to="/controlled">Controlled</Link> example, and composes it alongside an additional form field "Preferred Temperature" to generate a new controlled form.  This demonstrates a major benefit of controlled forms.

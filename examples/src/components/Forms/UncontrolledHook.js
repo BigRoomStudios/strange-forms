@@ -6,6 +6,8 @@ const { default: Checkbox } = require('@material-ui/core/Checkbox');
 const { useField } = require('./useField');
 const SubmitButtonRow = require('./SubmitButtonRow');
 
+// To consumers this component should feel exactly like UncontrolledForm
+
 module.exports = function UncontrolledHookForm({ name, email, spam, onSubmit, children, ...others }) {
 
     const { defaults } = UncontrolledHookForm;

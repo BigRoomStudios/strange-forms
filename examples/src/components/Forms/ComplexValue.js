@@ -26,6 +26,10 @@ module.exports = class ComplexValueForm extends StrangeForms(Component) {
 
         const createEditorState = (getString) => {
 
+            // The memoization is necessary, otherwise the local form state object will be recreated
+            // every time that the page re-renders rather than just when the about prop changes.
+            // To observe an interesting bug, remove the call to Memoize() below, then in the Complex
+            // Value example, click "Re-render Parent" after modifying the about WYSIWYG field.
             const memoCreateFromString = Memoize((str) => RichTextEditor.createValueFromString(str, 'markdown'));
 
             return (props) => memoCreateFromString(getString(props));
@@ -34,13 +38,15 @@ module.exports = class ComplexValueForm extends StrangeForms(Component) {
         this.strangeForm({
             fields: ['name', 'email', 'spam', 'about'],
             get: {
-                // TODO
+                // As in other examples, map props to local form state.
                 name: (props) => props.name ?? ComplexValueForm.defaults.name,
                 email: (props) => props.email ?? ComplexValueForm.defaults.email,
                 spam: (props) => props.spam ?? ComplexValueForm.defaults.spam,
+                // The about field needs some special handling because its form state is a
+                // complex object utilized by react-rte even though the prop is a markdown string.
                 about: createEditorState((props) => props.about ?? ComplexValueForm.defaults.about)
             },
-            // TODO
+            // A no-op act() indicates that this form is uncontrolled, and only has local form state.
             act: () => null,
             getFormValue: {
                 '*': (ev) => ev.target.value,
@@ -58,6 +64,7 @@ module.exports = class ComplexValueForm extends StrangeForms(Component) {
             name: this.fieldValue('name'),
             email: this.fieldValue('email'),
             spam: this.fieldValue('spam'),
+            // On submission, map the local form state object used by react-rte back to a markdown string.
             about: this.fieldValue('about').toString('markdown')
         });
     }
@@ -111,7 +118,7 @@ module.exports = class ComplexValueForm extends StrangeForms(Component) {
             </Grid>
             <Grid item xs={4} container justify="center">
                 <Button type="button" variant="outlined" color="secondary" onClick={onClickRerender}>
-                    Re-render parent
+                    Re-render Parent
                 </Button>
             </Grid>
             <SubmitButtonRow />

@@ -8,6 +8,7 @@ const SubmitButtonRow = require('./SubmitButtonRow');
 
 module.exports = class UncontrolledForm extends StrangeForms(Component) {
 
+    // These are exported for the benefit of consumers of this form, e.g. to initialize their state prior to form submission.
     static defaults = {
         name: '',
         email: '',
@@ -21,16 +22,17 @@ module.exports = class UncontrolledForm extends StrangeForms(Component) {
         this.strangeForm({
             fields: ['name', 'email', 'spam'],
             get: {
-                // These returned values never change, so this
-                // simply sets a default value for each field.
+                // Whenever the result of any of these changes, it's synced into local form state.
+                // This most notably happens when a new user is selected from the page's dropdown.
                 name: (props) => props.name ?? UncontrolledForm.defaults.name,
                 email: (props) => props.email ?? UncontrolledForm.defaults.email,
                 spam: (props) => props.spam ?? UncontrolledForm.defaults.spam
             },
             // This act() is a no-op because this form is uncontrolled,
-            // and we don't need to sync form state anywhere (e.g. not up to props).
+            // and we don't need to sync form state to anywhere (e.g. not up to props).
             act: () => null,
             getFormValue: {
+                // These pull the form value out of the args passed to proposeNew()
                 '*': (ev) => ev.target.value,
                 spam: (ev) => ev.target.checked
             }

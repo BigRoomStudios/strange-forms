@@ -1,6 +1,6 @@
 const { useState } = require('react');
 const FormValuesLayout = require('./FormValuesLayout');
-const UncontrolledForm = require('../../../components/Forms/Uncontrolled');
+const UncontrolledForm = require('../../../components/Forms/Uncontrolled'); // Could also be UncontrolledHook
 const { default: Grid } = require('@material-ui/core/Grid');
 const { default: Select } = require('@material-ui/core/Select');
 const { default: MenuItem } = require('@material-ui/core/MenuItem');
@@ -9,7 +9,7 @@ const FormExplainer = require('./FormExplainer');
 
 const internals = {};
 
-module.exports = function UncontrolledPage() {
+module.exports = function UncontrolledFormPage() {
 
     const { Explainer, users } = internals;
     const [edit, setEdit] = useState('');
@@ -30,7 +30,7 @@ module.exports = function UncontrolledPage() {
                         setValues({ ...user, submitted: false });
                     }}
                 >
-                    <MenuItem value=""><em>None</em></MenuItem>
+                    <MenuItem value=""><em>Select User</em></MenuItem>
                     <MenuItem value="devin">{users.devin.name}</MenuItem>
                     <MenuItem value="cal">{users.cal.name}</MenuItem>
                 </Select>
@@ -60,8 +60,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Uncontrolled"
-        formUrl="/"
-        pageUrl="/"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/Uncontrolled.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/UncontrolledPage.js"
     >
         <Typography gutterBottom>
             This form is uncontrolled, meaning that the form values are not known to the form's parent until submission is complete.  Notice that as you type in the form, the external form state on the right does not update.  Once you click "Submit," all the form values appear.

@@ -1,7 +1,7 @@
 const { useState } = require('react');
 const { Link } = require('react-router-dom');
 const FormValuesLayout = require('./FormValuesLayout');
-const ControlledForm = require('../../../components/Forms/Controlled');
+const ControlledForm = require('../../../components/Forms/Controlled'); // Could also be ControlledHook
 const SubmitButtonRow = require('../../../components/Forms/SubmitButtonRow');
 const { default: Grid } = require('@material-ui/core/Grid');
 const { default: Select } = require('@material-ui/core/Select');
@@ -11,7 +11,7 @@ const FormExplainer = require('./FormExplainer');
 
 const internals = {};
 
-module.exports = function ControlledPage() {
+module.exports = function ControlledFormPage() {
 
     const { Explainer, users } = internals;
     const [edit, setEdit] = useState('');
@@ -32,7 +32,7 @@ module.exports = function ControlledPage() {
                         setValues({ ...user, submitted: false });
                     }}
                 >
-                    <MenuItem value=""><em>None</em></MenuItem>
+                    <MenuItem value=""><em>Select User</em></MenuItem>
                     <MenuItem value="devin">{users.devin.name}</MenuItem>
                     <MenuItem value="cal">{users.cal.name}</MenuItem>
                 </Select>
@@ -71,8 +71,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Controlled"
-        formUrl="/"
-        pageUrl="/"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/Controlled.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/ControlledPage.js"
     >
         <Typography gutterBottom>
             This form is controlled, meaning that the form values are synced to the page's state via props.  Notice that as you type in the form, the page state is updated in realtime even before the form has been submitted.  Select a user using the dropdown in the upper-left and see their information sync down to the form values.

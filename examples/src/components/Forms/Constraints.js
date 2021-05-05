@@ -26,7 +26,8 @@ module.exports = class ConstraintsForm extends StrangeForms(Component) {
         const sum = (a, b) => a + b;
         const totalChecked = () => checkFields.map(getFieldValue).map(Number).reduce(sum, 0);
         const constrainChecks = (diff) => {
-
+            // Enforce constraints by seeing if there are (or would be) more checked checkboxes
+            // than allowed per the `diff`, then crafting an update to uncheck them.
             const update = {};
 
             for (let i = 0; i < checkFields.length && diff > 0; ++i) {
@@ -42,8 +43,11 @@ module.exports = class ConstraintsForm extends StrangeForms(Component) {
 
         this.strangeForm({
             fields: ['maxChecked', ...checkFields],
+            // In the other examples we map each field for explicitness and to keep things simple for demo purposes.
+            // But you can also write a dynamic mapper using `field` as an argument.
             get: (props, field) => props[field] ?? ConstraintsForm.defaults[field],
             act: {
+                // Constraints are enforced in act(), which all field value updates must pass through.
                 '*': (field, value) => {
 
                     const diff = totalChecked() - getFieldValue('maxChecked');
@@ -65,7 +69,7 @@ module.exports = class ConstraintsForm extends StrangeForms(Component) {
             },
             getFormValue: {
                 '*': (ev) => ev.target.checked,
-                maxChecked: (ev) => ev.target.value
+                maxChecked: (ev) => Number(ev.target.value)
             }
         });
     }

@@ -25,8 +25,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Complex Value"
-        formUrl="/"
-        pageUrl="/"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/ComplexValue.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/ComplexValuePage.js"
     >
         <Typography gutterBottom>
             This is an uncontrolled form containing a complex value.  The state of the WYSIWYG editor used for the "About" field is represented by an object.  Objects are special because no two objects are referentially identical (<code>obj1 !== obj2</code>).  The other form values are strings and booleans, which can be referentially identical (<code>str1 === str2</code> if they contain the same content).

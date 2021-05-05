@@ -5,6 +5,8 @@ const { default: FormControlLabel } = require('@material-ui/core/FormControlLabe
 const { default: Checkbox } = require('@material-ui/core/Checkbox');
 const { useField } = require('./useField');
 
+// To consumers this component should feel exactly like ControlledForm
+
 module.exports = function ControlledHookForm({ name, email, spam, onChange, children, ...others }) {
 
     const syncToProp = (field) => {

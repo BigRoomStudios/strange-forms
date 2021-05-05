@@ -34,8 +34,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="List"
-        formUrl="/"
-        pageUrl="/"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/List.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/ListPage.js"
     >
         <Typography gutterBottom>
             This is a controlled form comprised of arbitrarily many copies of the form component from the <Link to="/controlled">Controlled</Link> example.  The user may click the "+" button to add a new copy of the form.

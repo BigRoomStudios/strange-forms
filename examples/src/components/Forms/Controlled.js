@@ -20,14 +20,16 @@ module.exports = class ControlledForm extends StrangeForms(Component) {
         this.strangeForm({
             fields: ['name', 'email', 'spam'],
             get: {
-                // TODO sync down
-                name: (props) => (props.name ?? ControlledForm.defaults.name),
-                email: (props) => (props.email ?? ControlledForm.defaults.email),
-                spam: (props) => (props.spam ?? ControlledForm.defaults.spam)
+                // Whenever the result of any of these changes, it's synced into local form state.
+                // This most notably happens when a prop is updated via act(), e.g. on each keystroke.
+                name: (props) => props.name ?? ControlledForm.defaults.name,
+                email: (props) => props.email ?? ControlledForm.defaults.email,
+                spam: (props) => props.spam ?? ControlledForm.defaults.spam
             },
-            // TODO sync up
+            // This act() syncs field value changes to props through onChange() provided by the consumer.
             act: (field, value) => this.props.onChange({ [field]: value }),
             getFormValue: {
+                // These pull the form value out of the args passed to proposeNew()
                 '*': (ev) => ev.target.value,
                 spam: (ev) => ev.target.checked
             }

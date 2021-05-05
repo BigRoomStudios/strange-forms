@@ -3,9 +3,12 @@ const T = require('prop-types');
 const { default: Grid } = require('@material-ui/core/Grid');
 const { default: Fab } = require('@material-ui/core/Fab');
 const { default: AddIcon } = require('@material-ui/icons/Add');
-const ControlledForm = require('./Controlled');
+const ControlledForm = require('./Controlled'); // Could also be ControlledHook
 
 const internals = {};
+
+// Strange-forms doesn't deal particularly well with forms that have a dynamic structure,
+// however we can compose a controlled form built using strange-forms into a dynamic list.
 
 module.exports = class ListForm extends Component {
 
@@ -68,6 +71,8 @@ module.exports.propTypes = {
     children: T.any
 };
 
+// It's convenient if ControlledForm is wrapped in a component that propagates its index in the list
+// up as part of onChange() to a generic handler, in this case above handleChange().
 internals.ControlledFormItem = ({ index, onChange, ...others }) => {
 
     return <ControlledForm
@@ -77,6 +82,7 @@ internals.ControlledFormItem = ({ index, onChange, ...others }) => {
             onChange({
                 index,
                 item: {
+                    // This is the full item plus the updated field.
                     ...Object.keys(ControlledForm.defaults)
                         .reduce((collect, field) => ({
                             ...collect,
