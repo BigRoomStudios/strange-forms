@@ -6,12 +6,18 @@
 
 To get started, you can check this code out, `npm install`, then run `npm start`.  You'll find six usage examples, each annotated with comments and an in-page explainer:
 
- - Uncontrolled [[form](./src/components/Forms/Uncontrolled.js)] [[page](./src/routes/forms/components/UncontrolledPage.js)]
- - Controlled [[form](./src/components/Forms/Controlled.js)] [[page](./src/routes/forms/components/ControlledPage.js)]
- - Complex Value [[form](./src/components/Forms/ComplexValue.js)] [[page](./src/routes/forms/components/ComplexValuePage.js)]
- - Nested [[form](./src/components/Forms/Nested.js)] [[page](./src/routes/forms/components/NestedPage.js)]
- - Constraints [[form](./src/components/Forms/Constraints.js)] [[page](./src/routes/forms/components/ConstraintsPage.js)]
- - List [[form](./src/components/Forms/List.js)] [[page](./src/routes/forms/components/ListPage.js)]
+ - Uncontrolled [[form](./src/components/Forms/Uncontrolled.js)] [[page](./src/routes/forms/components/UncontrolledPage.js)] - an uncontrolled form.
+ - Controlled [[form](./src/components/Forms/Controlled.js)] [[page](./src/routes/forms/components/ControlledPage.js)] - a controlled form.
+ - Complex Value [[form](./src/components/Forms/ComplexValue.js)] [[page](./src/routes/forms/components/ComplexValuePage.js)] - an uncontrolled form with a complex form value for WYSIWYG input state.
+ - Nested [[form](./src/components/Forms/Nested.js)] [[page](./src/routes/forms/components/NestedPage.js)] - composing the controlled form from the Controlled example into a new controlled form with an additional field.
+ - Constraints [[form](./src/components/Forms/Constraints.js)] [[page](./src/routes/forms/components/ConstraintsPage.js)] - applying constraints on user input.
+ - List [[form](./src/components/Forms/List.js)] [[page](./src/routes/forms/components/ListPage.js)] - composing arbitrarily many copies of the controlled form from the Controlled example into a list of independent forms, acting as a single controlled form.
+
+In order to illustrate the inner-workings of strange-forms, there is also a concise reference implementation using hooks, which is used to re-implement versions of the Controlled and Uncontrolled form examples.
+
+ - `useField()` [[impl](./src/components/Forms/useField.js)] - a reference implementation of strange-forms for a single field using hooks, to illustrate its inner workings and help document the terminology.
+ - Controlled w/ hooks [[form](./src/components/Forms/ControlledHook.js)] - may be swapped into any example using ControlledForm just by altering the `require()` location.
+ - Uncontrolled w/ hooks [[form](./src/components/Forms/UncontrolledHook.js)] - may be swapped into any example using UncontrolledForm just by altering the `require()` location.
 
 ## Requirements
 * node `12.x.x`
