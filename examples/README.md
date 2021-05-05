@@ -1,24 +1,14 @@
-# strangeluv
+# strange-forms examples
+> Usage examples of strange-forms, based on [strangeluv](https://github.com/BigRoomStudios/strangeluv)
 
-> How I Learned to Stop Worrying and Love React
+To get started, you can check this code out, `npm install`, then run `npm start`.  You'll find six usage examples, each annotated with comments and an in-page explainer:
 
-[![Build Status](https://travis-ci.org/BigRoomStudios/strangeluv.svg?branch=strangeluv)](https://travis-ci.org/BigRoomStudios/strangeluv?branch=strangeluv)
-[![dependencies](https://status.david-dm.org/gh/BigRoomStudios/strangeluv.svg?ref=strangeluv)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv)
-[![devDependency Status](https://status.david-dm.org/gh/BigRoomStudios/strangeluv.svg?ref=strangeluv&type=dev)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv#info=devDependencies)
-
-Strangeluv is an opinionated, curated set of tools for building React applications.
-
- - *UI* - `react` `react-dom`
- - *Styles & Design* - `styled-components` `@material-ui/core` `@material-ui/styles`
- - *State* - `redux` `react-redux` `redux-thunk` `strange-middle-end` `normalizr` `immer`
- - *Routing* - `react-router` `react-router-dom` `connected-react-router` `strange-router` `history`
- - *Errors* - `react-error-boundary` `error-overlay-webpack-plugin`
- - *Builds* - `webpack` `html-webpack-plugin` `copy-webpack-plugin` `file-loader` `@babel/core` `babel-preset-react-app`
- - *Production server* - `@hapi/hapi` `@hapi/inert`
- - *Development server* - `webpack-dev-server`
- - *HMR* - `react-hot-loader` `@hot-loader/react-dom`
- - *Tests* - `jest` `@testing-library/react`
- - *Lint* - `eslint` `@hapi/eslint-config-hapi` `eslint-config-standard-react`
+ - Uncontrolled [[form](./src/components/Forms/Uncontrolled.js)] [[page](./src/routes/forms/components/UncontrolledPage.js)]
+ - Controlled [[form](./src/components/Forms/Controlled.js)] [[page](./src/routes/forms/components/ControlledPage.js)]
+ - Complex Value [[form](./src/components/Forms/ComplexValue.js)] [[page](./src/routes/forms/components/ComplexValuePage.js)]
+ - Nested [[form](./src/components/Forms/Nested.js)] [[page](./src/routes/forms/components/NestedPage.js)]
+ - Constraints [[form](./src/components/Forms/Constraints.js)] [[page](./src/routes/forms/components/ConstraintsPage.js)]
+ - List [[form](./src/components/Forms/List.js)] [[page](./src/routes/forms/components/ListPage.js)]
 
 ## Requirements
 * node `12.x.x`
