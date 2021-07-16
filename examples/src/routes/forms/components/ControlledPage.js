@@ -71,8 +71,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Controlled"
-        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/Controlled.js"
-        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/ControlledPage.js"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/master/examples/src/components/Forms/Controlled.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/master/examples/src/routes/forms/components/ControlledPage.js"
     >
         <Typography gutterBottom>
             This form is controlled, meaning that the form values are synced to the page's state via props.  Notice that as you type in the form, the page state is updated in realtime even before the form has been submitted.  Select a user using the dropdown in the upper-left and see their information sync down to the form values.

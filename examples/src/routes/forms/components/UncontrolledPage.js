@@ -60,8 +60,8 @@ internals.Explainer = () => (
 
     <FormExplainer
         header="Uncontrolled"
-        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/components/Forms/Uncontrolled.js"
-        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/examples/examples/src/routes/forms/components/UncontrolledPage.js"
+        formUrl="https://github.com/BigRoomStudios/strange-forms/blob/master/examples/src/components/Forms/Uncontrolled.js"
+        pageUrl="https://github.com/BigRoomStudios/strange-forms/blob/master/examples/src/routes/forms/components/UncontrolledPage.js"
     >
         <Typography gutterBottom>
             This form is uncontrolled, meaning that the form values are not known to the form's parent until submission is complete.  Notice that as you type in the form, the external form state on the right does not update.  Once you click "Submit," all the form values appear.
