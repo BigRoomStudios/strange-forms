@@ -8,6 +8,8 @@ Redux/React toolkit for forms
 ## Usage
 This is a toolkit for using forms with React and Redux.  Specifically, this is meant to help create components containing forms that attempt to update and reflect application state.  The special thing about this library is that it assumes the value displayed in a form may deviate from the current value in state, and this library does not rely on any special coordination with actions/reducers as in [react-redux-form](https://github.com/davidkpiano/react-redux-form).  When there's a discrepancy between a value in the form and a value in state, it can be recognized an invalid field in the form– this simple fact allows validation to occur solely in the reducer if desired (where it belongs!).
 
+There are a handful of annotated examples located in the [examples/](./examples) directory.
+
 ### Example
 ```js
 const React = require('react');
