@@ -71,7 +71,7 @@
     "eslint-plugin-react": "7.x.x",
     "eslint-plugin-react-hooks": "4.x.x",
     "file-loader": "6.x.x",
-    "html-webpack-plugin": "4.x.x",
+    "html-webpack-plugin": "5.x.x",
     "jest": "26.x.x",
     "jest-environment-jsdom-fifteen": "^1.0.2",
     "pre-commit": "^1.2.2",
@@ -79,7 +79,7 @@
     "react-dev-utils": "^11.0.4",
     "regenerator-runtime": "0.13.x",
     "rimraf": "3.x.x",
-    "webpack": "4.x.x",
+    "webpack": "5.x.x",
     "webpack-cli": "4.x.x",
     "webpack-dev-server": "3.x.x"
   },
